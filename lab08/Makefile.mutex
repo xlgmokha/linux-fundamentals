@@ -1,0 +1,11 @@
+
+APP	= mutex
+
+#############################################################################
+
+include ../make/defaults.mk
+
+CC	:= $(CC) -lpthread
+
+include ../make/app-rules.mk
+

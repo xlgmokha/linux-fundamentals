@@ -1,0 +1,11 @@
+
+APP	= snd
+
+#############################################################################
+
+include ../make/defaults.mk
+
+CC	:= $(CC) -lrt
+
+include ../make/app-rules.mk
+

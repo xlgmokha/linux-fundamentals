@@ -1,0 +1,24 @@
+CC=/home/student/crosstools/arm-2010.09/bin/arm-none-linux-gnueabi-gcc
+
+all: install
+
+# link .o's together with correct soname and real name
+libmy-utils.so.1.0 : test1.o test2.o test3.o
+	$(CC) -o libmy-utils.so.1.0 test1.o test2.o test3.o -shared -Wl,-soname=libmy-utils.so.1
+
+test1.o : test1.c # compile test1 w/ correct flags and output test1.o
+	$(CC) -o test1.o -fPIC -c test1.c
+
+test2.o : test2.c # compile test2 w/ correct flags and output test2.o
+	$(CC) -o test2.o -fPIC -c test2.c
+
+test3.o : test3.c # compile test3 w/ correct flags and output test3.o
+	$(CC) -o test3.o -fPIC -c test3.c
+
+clean:
+	rm -f *.o *.so.*
+
+install: libmy-utils.so.1.0
+	cp $< /home/student/targetfs/usr/local/lib
+
+
