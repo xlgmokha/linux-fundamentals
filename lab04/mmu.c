@@ -11,9 +11,11 @@ int main()
 	char *mallocptr = malloc(100);
 
 	printf("\n");
-        // print addresses of stack, BSS, data, heap segments
+	printf("Address of bss section var  = 0x%08x\n", (unsigned)&bssvar);
+	printf("Address of data section var = 0x%08x\n", (unsigned)&datavar);
+	printf("Address of stack var        = 0x%08x\n", (unsigned)&stackvar);
+	printf("Address of malloc'd space   = 0x%08x\n", (unsigned)mallocptr);
 
-	// for extra credit, print the address of the code segment
 	while (1) {
 		sleep(10);
 	}
