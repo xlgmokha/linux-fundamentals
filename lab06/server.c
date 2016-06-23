@@ -41,16 +41,16 @@ static void daemonize(void)
 
 void hup_handler(int x)
 {
-	syslog(LOG_DAEMON | LOG_INFO, "Server received SIGHUP at %d\n",
-		time(0));
-        signal(SIGHUP, hup_handler);
+	syslog(LOG_DAEMON | LOG_INFO, "Server received SIGHUP at %d\n", time(0));
+	signal(SIGHUP, hup_handler);
 }
 
 int main()
 {
-	/* insert code to daemonize here */
-
-	/* install signal handler here */
+	daemonize();
+	if (signal(SIGHUP, hup_handler) == SIG_ERR) {
+		syslog(LOG_DAEMON | LOG_INFO, "Server failed to install signal handler\n");
+	}
 
 	while(1) {
 		sleep(1);
