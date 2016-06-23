@@ -34,24 +34,17 @@ int main(void)
 	if (pthread_attr_init(&attr)) {
 		exit(1);
 	}
-	if (pthread_attr_setschedpolicy(&attr, SCHED_OTHER)) {
+	if (pthread_attr_setschedpolicy(&attr, SCHED_RR)) {
 		exit(1);
 	}
 
 	/* Start 3 threads */
 	prev_thr_id = 0;
 	for (x=0; x<3; x++) {
-          /* 
-          Fill in the code ala ...
-          if (pthread_create(&currentThreadID, &attribute, 
-                             thread, (void*)previousThreadID)) {
-		exit(1);
-	  }
-          */
-
-	/* insert your code here */
-
-	  prev_thr_id = curr_thr_id;
+		if (pthread_create(&curr_thr_id, &attr, thread, (void*)prev_thr_id)) {
+			exit(1);
+		}
+		prev_thr_id = curr_thr_id;
 	}
 
 	/* Join last thread */

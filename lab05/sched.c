@@ -61,6 +61,24 @@ int main(void)
 	int two=2;
 
 	/* Add your scheduler setup logic here */
+	pthread_attr_init(&attr);
+	pthread_attr_setinheritsched(&attr, PTHREAD_EXPLICIT_SCHED);
+
+	/* Use this line for the first run only */
+//        pthread_attr_setschedpolicy(&attr, SCHED_OTHER);
+	/* End of first run only code */
+
+	/* Use these lines for the second run only */
+//        pthread_attr_setschedpolicy(&attr, SCHED_RR);
+//        param.sched_priority = 10;
+//        pthread_attr_setschedparam(&attr, &param);
+	/* End of second run only code */
+
+	/* Use these lines for the third run only */
+        pthread_attr_setschedpolicy(&attr, SCHED_FIFO);
+        param.sched_priority = 10;
+        pthread_attr_setschedparam(&attr, &param);
+	/* End of third run only code */
 
 	if (pthread_create(&t1, &attr, thread, &one)) exit(1);
 	if (pthread_create(&t2, &attr, thread, &two)) exit(1);

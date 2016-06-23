@@ -6,13 +6,9 @@ int global;
 
 int main()
 {
-	/* 
-	   Have the parent fork() a child twice
-	   Use the return value of fork() to make sure you're the 
-	   parent before forking a second child
-	*/
-
-	/* Your code here */
+	if (fork()) {          /* only the 1st parent enters here */
+		fork();        /* ...to fork() a 2nd child...     */
+	}
 
 	/* All 3 processes (parent and children) run the following */
 
