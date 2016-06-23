@@ -10,8 +10,7 @@ clean:
 	rm -f $(APP) $(DESTDIR)/$(APP)
 
 $(APP): $(APP).c Makefile 
-	$(CC) -o $@ $<  # add the lib search path and lib name
+	$(CC) -o $@ $< -L. -lmy-utils # add the lib search path and lib name
 
 install: $(APP)
 	cp $< $(DESTDIR)
-

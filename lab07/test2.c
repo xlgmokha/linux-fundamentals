@@ -1,4 +1,4 @@
 int mult2 (int x)
 {
-	return(x*4);
+	return(x*2);
 }
