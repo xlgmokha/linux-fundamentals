@@ -91,10 +91,13 @@ void producer()
 
 int main()
 {
-	/* fork a child, if I'm the child, call producer and exit */
-
-	/* if I'm the parent, sleep for 1 second and call the consumer */
-
+	if (fork() == 0) {
+		/* start the producer/server first */
+		producer();
+		exit(0);
+	}
 	/* parent process proceeds here */
+	sleep(1);
+	consumer();
 	exit(0);
 }
