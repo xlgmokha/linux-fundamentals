@@ -17,17 +17,19 @@ void alarm_handler(int x) {
 
 int main()
 {
-	/* define the initial and interval to run at 5 hz */
-	struct timeval initial  = {0, ???/RATE};
-	struct timeval interval = {0, ???/RATE};
+	struct timeval initial  = {0, 1000000/RATE};
+	struct timeval interval = {0, 1000000/RATE};
 	struct itimerval t;
 
 	t.it_value = initial;
 	t.it_interval = interval;
-
-	/* install a signal handler for SIGALRM and start timer ticking */
-
-	/* use the count variable to terminate after 10 seconds */
-
+	if (signal(SIGALRM, alarm_handler) != SIG_ERR) {
+		if (!setitimer(ITIMER_REAL, &t, 0)) {
+			/* Perform other tasks waiting for our SIGALRMs */
+			while(count <= 50) {
+				;
+			}
+		}
+	}
 	exit(0);
 }
